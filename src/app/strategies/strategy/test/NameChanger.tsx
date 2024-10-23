@@ -12,7 +12,7 @@ function NameChanger() {
   const [newUserName, setNewUserName] = useState<string>(userName);
 
   return (
-    <div>
+    <div className="min-h-full flex-1">
       <h1>{userName}</h1>
 
       <input
