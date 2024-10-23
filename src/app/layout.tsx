@@ -16,9 +16,9 @@ export default function RootLayout({
   children: React.ReactNode;
 }>) {
   return (
-    <html lang="en" suppressHydrationWarning={true}>
+    <html lang="en" suppressHydrationWarning={true} style={{ height: "100vh" }}>
       <head />
-      <body className={inter.className}>
+      <body className={inter.className + " min-h-full"}>
         <ThemeProvider
           attribute="class"
           defaultTheme="dark"
