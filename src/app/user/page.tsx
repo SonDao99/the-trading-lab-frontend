@@ -1,3 +1,9 @@
+import { useStore } from "@/utils/hooks/useStore";
+
 export default function User() {
-  return <div>User page</div>;
+  const {
+    userStore: { userName, setUserName },
+  } = useStore();
+
+  return <div>{userName}</div>;
 }

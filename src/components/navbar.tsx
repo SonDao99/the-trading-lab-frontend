@@ -16,7 +16,7 @@ import { useStore } from "@/utils/hooks/useStore";
 
 export default function Navbar() {
   const {
-    authStore: { userName, fullName },
+    authStore: { email, name },
   } = useStore();
 
   return (
@@ -38,9 +38,9 @@ export default function Navbar() {
         <DropdownMenuContent className="w-56" align="end" forceMount>
           <DropdownMenuLabel className="font-normal">
             <div className="flex flex-col space-y-2">
-              <p className="text-m font-medium leading-none">{fullName}</p>
+              <p className="text-m font-medium leading-none">{name}</p>
               <p className="text-s leading-none text-muted-foreground">
-                {userName}
+                {email}
               </p>
             </div>
           </DropdownMenuLabel>

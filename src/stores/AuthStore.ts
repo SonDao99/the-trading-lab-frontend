@@ -3,8 +3,9 @@ import { makeAutoObservable } from "mobx";
 
 export default class AuthStore {
   rootStore: RootStore;
-  userName: string = "idik69";
-  fullName: string = "Izuk Dik";
+  email: string = "sondao1999@gmail.com";
+  name: string = "Son Dao";
+  userid: string = "113053702607165718413";
 
   constructor(rootStore: RootStore) {
     this.rootStore = rootStore;
