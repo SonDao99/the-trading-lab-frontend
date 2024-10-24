@@ -1,11 +1,11 @@
 "use client";
-
-import React from "react";
-import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
+import React, { useEffect, useState } from "react";
+import { Card, CardContent } from "@/components/ui/card";
 import { PlusCircle } from "lucide-react";
-import { StrategyCardData } from "@/lib/constants";
 import StrategyCard from "@/components/strategy-card";
+import { StrategyCardData } from "@/lib/constants";
 import Link from "next/link";
+import { getStrategies } from "@/api/strategies";
 
 // Fake data before BE is plugged in
 const mockStrategies = [
@@ -83,22 +83,36 @@ const mockStrategies = [
   },
 ];
 
-const TradingStrategyHomepage: React.FC = () => {
-  const [username] = React.useState("Test User");
+export default function TradingStrategyHomepage() {
+  const [strategies, setStrategies] = useState();
+  // const strategies: StrategyCardData[] = await getStrategies(
+  //   "113053702607165718413"
+  // );
+  // console.log(strategies);
+  // const strategies = await response.json();
+  useEffect(() => {
+    async function fetchPosts() {
+      let res = await getStrategies("113053702607165718413");
+      let data = await res.json();
+      setStrategies(data);
+    }
+    fetchPosts();
+  });
 
   return (
     <div className="min-h-screen bg-black text-white p-8">
       <h1 className="text-4xl font-bold mb-4">
-        Welcome back, <span className="text-[#6b27c0]">{username}</span>
+        Welcome back, <span className="text-[#6b27c0]">Test User</span>
       </h1>
       <p className="text-xl text-gray-400 mb-8">
         Some inspirational trading quote idk lol
       </p>
 
       <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
-        {mockStrategies.map((strategy: StrategyCardData) => (
-          <StrategyCard key={strategy.id} strategy={strategy} />
-        ))}
+        {strategies &&
+          strategies.map((strategy: StrategyCardData) => (
+            <StrategyCard key={strategy.id} strategy={strategy} />
+          ))}
 
         <Link href={"/develop-strategy"}>
           <Card className="bg-gray-900 border-gray-800 flex items-center justify-center cursor-pointer hover:bg-gray-800 transition-colors">
@@ -113,6 +127,4 @@ const TradingStrategyHomepage: React.FC = () => {
       </div>
     </div>
   );
-};
-
-export default TradingStrategyHomepage;
+}
