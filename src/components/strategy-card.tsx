@@ -13,15 +13,15 @@ export default function StrategyCard({
     >
       <CardHeader>
         <CardTitle className="text-2xl font-semibold text-white">
-          {strategy.name}
+          {strategy.strategyName}
         </CardTitle>
       </CardHeader>
       <CardContent className="text-lg">
         <p className="text-gray-400 mb-3">Strategy ID: {strategy.id}</p>
-        <p className="text-gray-400 mb-3">
+        {/* <p className="text-gray-400 mb-3">
           Stocks: {strategy.stocks.join(", ")}
         </p>
-        <p className="text-gray-400">Timeframe: {strategy.timeframe}</p>
+        <p className="text-gray-400">Timeframe: {strategy.timeframe}</p> */}
       </CardContent>
     </Card>
   );

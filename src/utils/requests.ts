@@ -1,8 +1,3 @@
-const getErrorMessage = (error: unknown) => {
-  if (error instanceof Error) return error.message;
-  return String(error);
-};
-
 export const getRequest = async (url: string, params: object = {}) => {
   try {
     const response = await fetch(url, { ...params });
@@ -14,7 +9,7 @@ export const getRequest = async (url: string, params: object = {}) => {
     const json = await response.json();
     return json;
   } catch (error) {
-    console.error(getErrorMessage(error));
+    console.error(error);
   }
 };
 

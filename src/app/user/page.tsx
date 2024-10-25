@@ -1,9 +1,12 @@
 import { useStore } from "@/utils/hooks/useStore";
+import { observer } from "mobx-react-lite";
 
-export default function User() {
+function User() {
   const {
     userStore: { userName, setUserName },
   } = useStore();
 
   return <div>{userName}</div>;
 }
+
+export default observer(User);
