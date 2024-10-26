@@ -1,31 +1,26 @@
 export const getRequest = async (url: string, params: object = {}) => {
-  try {
-    const response = await fetch(url, { ...params });
+  const response = await fetch(url, { ...params, cache: "no-store" });
 
-    if (!response.ok) {
-      throw new Error(`Response status: ${response.status}`);
-    }
-
-    const json = await response.json();
-    return json;
-  } catch (error) {
-    console.error(error);
+  if (!response.ok) {
+    throw new Error(`Response status: ${response.status}`);
   }
+
+  const json = await response.json();
+  return json;
 };
 
 export const postRequest = async (url: string, body: object) => {
-  try {
-    const response = await fetch(url, {
-      method: "POST",
-      body: JSON.stringify(body),
-    });
+  const response = await fetch(url, {
+    method: "POST",
+    headers: {
+      "Content-Type": "application/json",
+    },
+    body: JSON.stringify(body),
+  });
 
-    if (!response.ok) {
-      throw new Error(`Response status: ${response.status}`);
-    }
-
-    return response.status;
-  } catch (error) {
-    console.error(error);
+  if (!response.ok) {
+    throw new Error(`Response status: ${response.status}`);
   }
+
+  return response.json();
 };
