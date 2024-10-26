@@ -4,11 +4,14 @@ import { Inter } from "next/font/google";
 import "./globals.css";
 import Navbar from "@/components/navbar";
 
+export const dynamic = "force-dynamic";
+export const revalidate = false;
+
 const inter = Inter({ subsets: ["latin"] });
 
 export const metadata: Metadata = {
   title: "The Trading Lab",
-  description: "Test Your Trading Strategies with the Help of AI",
+  description: "Create Trading Strategies with the Help of AI",
 };
 
 export default function RootLayout({
