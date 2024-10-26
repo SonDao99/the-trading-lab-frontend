@@ -12,13 +12,8 @@ import {
   DropdownMenuSeparator,
   DropdownMenuTrigger,
 } from "@/components/ui/dropdown-menu";
-import { useStore } from "@/utils/hooks/useStore";
 
 export default function Navbar() {
-  const {
-    authStore: { email, name },
-  } = useStore();
-
   return (
     <nav className="flex items-center justify-between p-4 bg-background border-b">
       <Link href="/strategies" className="text-xl font-bold">
@@ -38,9 +33,9 @@ export default function Navbar() {
         <DropdownMenuContent className="w-56" align="end" forceMount>
           <DropdownMenuLabel className="font-normal">
             <div className="flex flex-col space-y-2">
-              <p className="text-m font-medium leading-none">{name}</p>
+              <p className="text-m font-medium leading-none">Mike Hunt</p>
               <p className="text-s leading-none text-muted-foreground">
-                {email}
+                mhunt@gmail.com
               </p>
             </div>
           </DropdownMenuLabel>

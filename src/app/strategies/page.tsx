@@ -8,13 +8,14 @@ import { getStrategies } from "@/api/strategies";
 
 export default async function TradingStrategyHomepage() {
   const strategies = await getStrategies("113053702607165718413");
+  console.log(strategies);
 
   return (
     <div className="min-h-screen bg-black text-white p-8">
-      <h1 className="text-4xl font-bold mb-4">
+      <h1 className="text-2xl font-bold mb-4">
         Welcome back, <span className="text-[#6b27c0]">Test User</span>
       </h1>
-      <p className="text-xl text-gray-400 mb-8">
+      <p className="text-l text-gray-400 mb-8">
         Create new strategies or click on an existing strategy to see more
         details
       </p>
