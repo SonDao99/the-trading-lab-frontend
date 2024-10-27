@@ -43,10 +43,6 @@ export default function CreateStrategy() {
     setLoading(true);
     let resID;
 
-  const [tokenData, sessionData] = await Promise.all([getToken(), getSession()]);
-  console.log("TOKEN PAGE: " + tokenData);
-  console.log("SESSION PAGE: " + sessionData);
-
     try {
       const res = await postStrategy(
         "101007466203640277268",
@@ -56,9 +52,7 @@ export default function CreateStrategy() {
           ". Trading style:" +
           data.tradingStyle +
           ". Markets: " +
-          data.markets,
-          tokenData,
-          sessionData
+          data.markets
       );
 
       setIsSubmitted(true);

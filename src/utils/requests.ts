@@ -1,4 +1,10 @@
-export const getRequest = async (url, token, session) => {
+// @ts-ignore
+export const getRequest = async (url) => {
+
+    const token = await getToken();
+    const session = await getSession();
+    
+
     const response = await fetch(url, {
         headers: {
             'Content-Type': 'application/json',
@@ -23,15 +29,25 @@ export const getToken = async () => {
   return await response.text();
 }
 
-
 export const getSession = async () => {
   const response = await fetch(`http://localhost:8080/session`, {credentials: "include", cache: "no-store", method: "GET"});
   return await response.text();
 }
 
+export const getUserId = async () => {
+    const response = await fetch(`http://localhost:8080/home`, {credentials: "include", cache: "no-store", method: "GET"});
+    const data = await response.json();
+    return data.userId;
+}
 
-export const postRequest = async (url: string, token, session, body: object) => {
-  const response = await fetch(url, {
+
+// @ts-ignore
+export const postRequest = async (url: string, body: object) => {
+
+    const token = await getToken();
+    const session = await getSession();
+
+    const response = await fetch(url, {
     method: "POST",
     credentials: 'include',
     cache: 'no-store',
@@ -41,7 +57,6 @@ export const postRequest = async (url: string, token, session, body: object) => 
       'Cookie': `MYSESSIONID=${session}`
     },
     body: JSON.stringify(body),
-    cache: "no-cache",
   });
 
   if (!response.ok) {
@@ -52,13 +67,20 @@ export const postRequest = async (url: string, token, session, body: object) => 
 };
 
 export const putRequest = async (url: string, body: object) => {
+
+    const token = await getToken();
+    const session = await getSession();
+
   const response = await fetch(url, {
     method: "PUT",
     headers: {
       "Content-Type": "application/json",
+        'Authorization': `Bearer ${token}`,
+        'Cookie': `MYSESSIONID=${session}`
     },
     body: JSON.stringify(body),
     cache: "no-cache",
+    credentials: 'include'
   });
 
   if (!response.ok) {
@@ -69,12 +91,18 @@ export const putRequest = async (url: string, body: object) => {
 };
 
 export const deleteRequest = async (url: string) => {
-  const response = await fetch(url, {
+    const token = await getToken();
+    const session = await getSession();
+
+    const response = await fetch(url, {
     method: "DELETE",
     headers: {
       "Content-Type": "application/json",
+        'Authorization': `Bearer ${token}`,
+        'Cookie': `MYSESSIONID=${session}`
     },
     cache: "no-cache",
+    credentials: 'include'
   });
 
   if (!response.ok) {

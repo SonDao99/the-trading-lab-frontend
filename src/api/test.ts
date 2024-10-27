@@ -1,6 +1,6 @@
 import { deleteRequest, getRequest } from "@/utils/requests";
 
-const apiURL = process.env.NEXT_PUBLIC_API_URL;
+const apiURL = "http://localhost:8080";
 
 export const getStockPrices = async (backtestID: string) => {
   const url = `${apiURL}/backtest/${backtestID}/stockprices`;

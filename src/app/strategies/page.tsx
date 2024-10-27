@@ -9,11 +9,7 @@ import { getToken, getSession} from "@/utils/requests";
 
 export default async function TradingStrategyHomepage() {
 
-    const [tokenData, sessionData] = await Promise.all([getToken(), getSession()]);
-    console.log("TOKEN PAGE: " + tokenData);
-    console.log("SESSION PAGE: " + sessionData);
-
-    const strategies = await getStrategies(tokenData, sessionData);
+    const strategies = await getStrategies();
   
   return (
     <div className="min-h-screen bg-black text-white p-8">
