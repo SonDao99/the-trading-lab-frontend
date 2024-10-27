@@ -182,6 +182,22 @@ export default function CandlestickChart({ data }: { data: StockPrices[] }) {
       ctx.moveTo(xCoord, open);
       ctx.lineTo(xCoord, close);
       ctx.stroke();
+
+      //draw arrows
+      if (point.action > 0) {
+        ctx.beginPath()
+        ctx.moveTo(xCoord - 5, low + 10)
+        ctx.lineTo(xCoord + 5, low + 10)
+        ctx.lineTo(xCoord, low)
+        ctx.fillStyle = '#089981'
+      } else if (point.action < 0) {
+        ctx.beginPath()
+        ctx.moveTo(xCoord - 5, high - 10)
+        ctx.lineTo(xCoord + 5, high - 10)
+        ctx.lineTo(xCoord, high)
+        ctx.fillStyle = '#f23645'
+        ctx.fill()
+      }
     });
   };
 
