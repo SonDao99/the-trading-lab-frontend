@@ -5,11 +5,16 @@ import StrategyCard from "@/components/strategy-card";
 import { StrategyCardData } from "@/lib/constants";
 import Link from "next/link";
 import { getStrategies } from "@/api/strategies";
+import { getToken, getSession} from "@/utils/requests";
 
 export default async function TradingStrategyHomepage() {
-  const strategies = await getStrategies("113053702607165718413");
-  console.log(strategies);
 
+    const [tokenData, sessionData] = await Promise.all([getToken(), getSession()]);
+    console.log("TOKEN PAGE: " + tokenData);
+    console.log("SESSION PAGE: " + sessionData);
+
+    const strategies = await getStrategies(tokenData, sessionData);
+  
   return (
     <div className="min-h-screen bg-black text-white p-8">
       <h1 className="text-2xl font-bold mb-4">

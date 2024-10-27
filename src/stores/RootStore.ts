@@ -10,6 +10,6 @@ export default class RootStore {
   constructor() {
     this.userStore = new UserStore(this);
     this.authStore = new AuthStore(this);
-    this.strategiesStore = new StrategiesStore(this);
+    // this.strategiesStore = new StrategiesStore(this);
   }
 }
