@@ -32,6 +32,17 @@ type FormData = {
 };
 
 export default function Navbar() {
+
+  const handleLogout = async () => {
+    const response = await fetch('http://localhost:8080/logout');
+
+    if (response.ok) {
+      window.location.href = 'http://localhost:3000/login';
+    } else {
+      console.error('Logout failed:', response.statusText);
+    }
+  };
+
   const [dialogOpen, setDialogOpen] = useState(false);
   const [firstName, setFirstName] = useState("");
   const [lastName, setLastName] = useState("");
@@ -114,9 +125,9 @@ export default function Navbar() {
 
           <DropdownMenuSeparator />
 
-          <Link href="/login">
-            <DropdownMenuItem>Log out</DropdownMenuItem>
-          </Link>
+          <DropdownMenuItem onSelect={handleLogout}>
+            Log out
+          </DropdownMenuItem>
         </DropdownMenuContent>
       </DropdownMenu>
 
