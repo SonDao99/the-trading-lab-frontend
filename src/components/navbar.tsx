@@ -14,6 +14,17 @@ import {
 } from "@/components/ui/dropdown-menu";
 
 export default function Navbar() {
+
+  const handleLogout = async () => {
+    const response = await fetch('http://localhost:8080/logout');
+
+    if (response.ok) {
+      window.location.href = 'http://localhost:3000/login';
+    } else {
+      console.error('Logout failed:', response.statusText);
+    }
+  };
+
   return (
     <nav className="flex items-center justify-between p-4 bg-background border-b">
       <Link href="/strategies" className="text-xl font-bold">
@@ -48,9 +59,9 @@ export default function Navbar() {
 
           <DropdownMenuSeparator />
 
-          <Link href="/login">
-            <DropdownMenuItem>Log out</DropdownMenuItem>
-          </Link>
+          <DropdownMenuItem onSelect={handleLogout}>
+            Log out
+          </DropdownMenuItem>
         </DropdownMenuContent>
       </DropdownMenu>
     </nav>
