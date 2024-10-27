@@ -4,6 +4,7 @@ import { CardTitle } from "@/components/ui/card";
 import { StockData, TradeData } from "@/lib/constants";
 import DeleteTest from "./delete-test";
 import Link from "next/link";
+import BacktestChart from "@/components/charts/trades-chart";
 
 export default async function Page({
   params,
@@ -40,6 +41,7 @@ export default async function Page({
       </div>
       <div className="flex">
         <CandlestickChart data={stockData.stockPrices} />
+        <BacktestChart data={tradeData.backtestData} />
       </div>
     </div>
   );

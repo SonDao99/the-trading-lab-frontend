@@ -185,18 +185,18 @@ export default function CandlestickChart({ data }: { data: StockPrices[] }) {
 
       //draw arrows
       if (point.action > 0) {
-        ctx.beginPath()
-        ctx.moveTo(xCoord - 5, low + 10)
-        ctx.lineTo(xCoord + 5, low + 10)
-        ctx.lineTo(xCoord, low)
-        ctx.fillStyle = '#089981'
+        ctx.beginPath();
+        ctx.moveTo(xCoord - 5, low + 10);
+        ctx.lineTo(xCoord + 5, low + 10);
+        ctx.lineTo(xCoord, low);
+        ctx.fillStyle = "#089981";
       } else if (point.action < 0) {
-        ctx.beginPath()
-        ctx.moveTo(xCoord - 5, high - 10)
-        ctx.lineTo(xCoord + 5, high - 10)
-        ctx.lineTo(xCoord, high)
-        ctx.fillStyle = '#f23645'
-        ctx.fill()
+        ctx.beginPath();
+        ctx.moveTo(xCoord - 5, high - 10);
+        ctx.lineTo(xCoord + 5, high - 10);
+        ctx.lineTo(xCoord, high);
+        ctx.fillStyle = "#f23645";
+        ctx.fill();
       }
     });
   };
@@ -376,7 +376,7 @@ export default function CandlestickChart({ data }: { data: StockPrices[] }) {
   };
 
   return (
-    <div ref={containerRef} className="canvas-container flex-1 flex">
+    <div ref={containerRef} className="canvas-container flex-auto w-2/3 flex">
       <canvas ref={canvasRef} className="flex-1"></canvas>
       <canvas
         ref={hoverRef}
