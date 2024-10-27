@@ -22,6 +22,7 @@ import {
 import { Loader2 } from "lucide-react";
 import { postStrategy } from "@/api/strategies";
 import { useRouter } from "next/navigation";
+import { getToken, getSession} from "@/utils/requests";
 
 type FormData = {
   strategyName: string;
@@ -40,17 +41,23 @@ export default function CreateStrategy() {
   const onSubmit = async (data: FormData) => {
     setError(null);
     setLoading(true);
+    
+  const [tokenData, sessionData] = await Promise.all([getToken(), getSession()]);
+  console.log("TOKEN PAGE: " + tokenData);
+  console.log("SESSION PAGE: " + sessionData);
 
     try {
       const res = await postStrategy(
-        "113053702607165718413",
+        "101007466203640277268",
         data.strategyName,
         "Risk level: " +
           data.riskAversion +
           ". Trading style:" +
           data.tradingStyle +
           ". Markets: " +
-          data.markets
+          data.markets,
+          tokenData,
+          sessionData
       );
 
       setIsSubmitted(true);
