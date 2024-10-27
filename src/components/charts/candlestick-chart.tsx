@@ -1,23 +1,9 @@
 "use client";
+import { StockData, StockPrices } from "@/lib/constants";
 import * as d3 from "d3";
 import { useEffect, useRef, useState } from "react";
 
-type FinanceData = {
-  AAPL: {
-    values: [
-      {
-        open: number;
-        close: number;
-        datetime: Date;
-        high: number;
-        low: number;
-        volume: number;
-      },
-    ];
-  };
-};
-
-export default function CandlestickChart(data: { data: FinanceData }) {
+export default function CandlestickChart({ data }: { data: StockPrices[] }) {
   const containerRef = useRef<HTMLDivElement>(null);
   const canvasRef = useRef<HTMLCanvasElement>(null);
   const hoverRef = useRef<HTMLCanvasElement>(null);
@@ -27,10 +13,7 @@ export default function CandlestickChart(data: { data: FinanceData }) {
   const [dragStart, setDragStart] = useState(0);
   const [zoomState, setZoomState] = useState(1);
   const [candleWidth, setCandleWidth] = useState(0);
-  // const [yScale, setYScale] = useState<d3.ScaleLinear<number, number, never>>();
   const yScaleRef = useRef<d3.ScaleLinear<number, number, never>>();
-  // const [zoomedXScale, setZoomedXScale] =
-  //   useState<d3.ScaleTime<Number, number, never>>();
   const zoomedXScaleRef = useRef<d3.ScaleTime<Number, number, never>>();
 
   const drawChart = () => {
@@ -78,16 +61,16 @@ export default function CandlestickChart(data: { data: FinanceData }) {
     hoverCtx.clearRect(0, 0, canvas.width, canvas.height);
 
     //set up automatic scaling for x and y axes. Domain for values of the data, range for values of pixel
-    const dataArray = data.data.AAPL.values;
+    const dataArray = data;
 
     const usableWidth = canvas.width / scale - margin.left - margin.right;
     const usableHeight = canvas.height / scale - margin.top - margin.bottom;
 
-    const candleWidth = ((width * zoomState) / scale / dataArray.length) * 0.8;
+    const candleWidth = ((width * zoomState) / scale / dataArray.length) * 0.3;
     setCandleWidth(candleWidth);
     const xScale = d3
       .scaleTime()
-      .domain(d3.extent(dataArray, (d) => new Date(d.datetime)) as [Date, Date])
+      .domain(d3.extent(dataArray, (d) => new Date(d.time)) as [Date, Date])
       .range([margin.left, margin.left + usableWidth]);
 
     const yHigh = Math.max(...dataArray.map((d) => d.high));
@@ -147,7 +130,7 @@ export default function CandlestickChart(data: { data: FinanceData }) {
 
     //candlestick charts
     dataArray.forEach((point) => {
-      let xCoord = zoomedXScale(new Date(point.datetime));
+      let xCoord = zoomedXScale(new Date(point.time));
 
       const open = yScale(point.open);
       const close = yScale(point.close);
@@ -377,10 +360,7 @@ export default function CandlestickChart(data: { data: FinanceData }) {
   };
 
   return (
-    <div
-      ref={containerRef}
-      className="canvas-container min-h-full m-8 flex-1 flex"
-    >
+    <div ref={containerRef} className="canvas-container flex-1 flex">
       <canvas ref={canvasRef} className="flex-1"></canvas>
       <canvas
         ref={hoverRef}

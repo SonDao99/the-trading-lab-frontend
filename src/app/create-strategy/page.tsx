@@ -41,7 +41,8 @@ export default function CreateStrategy() {
   const onSubmit = async (data: FormData) => {
     setError(null);
     setLoading(true);
-    
+    let resID;
+
   const [tokenData, sessionData] = await Promise.all([getToken(), getSession()]);
   console.log("TOKEN PAGE: " + tokenData);
   console.log("SESSION PAGE: " + sessionData);
@@ -61,13 +62,17 @@ export default function CreateStrategy() {
       );
 
       setIsSubmitted(true);
-      router.push(`/strategies/${res.id}`);
+      resID = res.id;
     } catch (error) {
       if (error instanceof Error) {
         setError(error.message);
       }
-    } finally {
-      setLoading(false);
+    }
+
+    setLoading(false);
+    if (resID) {
+      router.push(`/strategies/${resID}`);
+      router.refresh();
     }
   };
 
@@ -78,7 +83,8 @@ export default function CreateStrategy() {
       </h1>
       {isSubmitted && (
         <div className="mt-6 mb-6 p-4 bg-green-100 text-green-700 rounded">
-          Strategy submitted successfully!
+          Strategy submitted successfully! Please wait while we redirect you to
+          your new strategy page...
         </div>
       )}
       {error && (
