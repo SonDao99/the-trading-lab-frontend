@@ -26,7 +26,7 @@ export default function LoginPage() {
                 <h1 className="text-4xl md:text-6xl font-bold mb-2">
                     THE TRADING <span className="text-[#6b27c0]">LAB</span>
                 </h1>
-                <p className="text-xl text-gray-400">The easy way to trade</p>
+                <p className="text-xl text-gray-400">The Easy Way to Trade</p>
             </div>
 
             <Card className="w-full max-w-md bg-gray-900 border-gray-800">
