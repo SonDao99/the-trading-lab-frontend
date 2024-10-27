@@ -58,7 +58,7 @@ export default function EditStrategy({
         params.strategy,
         stratName,
         data.prompt,
-        "113053702607165718413"
+        "101007466203640277268"
       );
 
       setIsSubmitted(true);

@@ -44,26 +44,26 @@ export default function Navbar() {
   };
 
   const [dialogOpen, setDialogOpen] = useState(false);
-  const [firstName, setFirstName] = useState("");
-  const [lastName, setLastName] = useState("");
-  const [email, setEmail] = useState("");
+  const [firstName, setFirstName] = useState("Oisin");
+  const [lastName, setLastName] = useState("Dermody");
+  const [email, setEmail] = useState("oisindermody@gmail.com");
   const [loading, setLoading] = useState(false);
   const form = useForm<FormData>();
 
-  useEffect(() => {
-    try {
-      const fetchUserInfo = async () => {
-        const res = await getUserInfo("113053702607165718413");
-        setFirstName(res.firstName);
-        setLastName(res.lastName);
-        setEmail(res.email);
-      };
+  //useEffect(() => {
+    //try {
+    //  const fetchUserInfo = async () => {
+     //   const res = await getUserInfo("113053702607165718413");
+    //    setFirstName(res.firstName);
+    //    setLastName(res.lastName);
+    //    setEmail(res.email);
+    //  };
 
-      fetchUserInfo();
-    } catch (error) {
-      console.log(error);
-    }
-  }, []);
+   //   fetchUserInfo();
+   // } catch (error) {
+   //   console.log(error);
+   // }
+  // }, []);
 
   const onSubmit = async (data: FormData) => {
     setLoading(true);

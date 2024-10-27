@@ -5,7 +5,7 @@ import {
   putRequest,
 } from "@/utils/requests";
 
-const apiURL = process.env.NEXT_PUBLIC_API_URL;
+const apiURL = "http://localhost:8080";
 
 export const getStrategy = async (strategyID: string) => {
   const url = `${apiURL}/strategies/${strategyID}`;
