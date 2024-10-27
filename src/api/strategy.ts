@@ -1,4 +1,9 @@
-import { deleteRequest, getRequest, postRequest } from "@/utils/requests";
+import {
+  deleteRequest,
+  getRequest,
+  postRequest,
+  putRequest,
+} from "@/utils/requests";
 
 const apiURL = process.env.NEXT_PUBLIC_API_URL;
 
@@ -11,6 +16,21 @@ export const getStrategy = async (strategyID: string) => {
 export const deleteStrategy = async (strategyID: string) => {
   const url = `${apiURL}/strategies/${strategyID}`;
   const data = await deleteRequest(url);
+  return data;
+};
+
+export const updateStrategy = async (
+  strategyID: string,
+  name: string,
+  prompt: string,
+  userId: string
+) => {
+  const url = `${apiURL}/strategies/${strategyID}`;
+  const data = await putRequest(url, {
+    name,
+    prompt,
+    userId,
+  });
   return data;
 };
 

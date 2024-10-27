@@ -26,16 +26,16 @@ export default async function TradingStrategyHomepage() {
             <StrategyCard key={strategy.id} strategy={strategy} />
           ))}
 
-        <Link href={"/create-strategy"}>
-          <Card className="bg-gray-900 border-gray-800 flex items-center justify-center cursor-pointer hover:bg-gray-800 transition-colors">
+        <Card className="bg-gray-900 border-gray-800 flex items-center justify-center cursor-pointer hover:bg-gray-800 transition-colors">
+          <Link href={"/create-strategy"}>
             <CardContent className="text-center">
               <PlusCircle className="w-16 h-16 text-[#6b27c0] mt-4 mb-2 mx-auto" />
               <p className="text-2xl font-semibold text-white">
                 Add New Strategy
               </p>
             </CardContent>
-          </Card>
-        </Link>
+          </Link>
+        </Card>
       </div>
     </div>
   );

@@ -1,9 +1,7 @@
 import type { ReactElement } from "react";
+import { redirect } from "next/navigation";
 
 export default function Home(): ReactElement {
-  return (
-    <main>
-      <div>hello</div>
-    </main>
-  );
+  redirect("/strategies");
+  return <main></main>;
 }

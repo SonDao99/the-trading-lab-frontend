@@ -1,9 +1,9 @@
 "use client";
-import { StockData } from "@/lib/constants";
+import { StockData, StockPrices } from "@/lib/constants";
 import * as d3 from "d3";
 import { useEffect, useRef, useState } from "react";
 
-export default function CandlestickChart({ data }: { data: StockData }) {
+export default function CandlestickChart({ data }: { data: StockPrices[] }) {
   const containerRef = useRef<HTMLDivElement>(null);
   const canvasRef = useRef<HTMLCanvasElement>(null);
   const hoverRef = useRef<HTMLCanvasElement>(null);
@@ -61,13 +61,12 @@ export default function CandlestickChart({ data }: { data: StockData }) {
     hoverCtx.clearRect(0, 0, canvas.width, canvas.height);
 
     //set up automatic scaling for x and y axes. Domain for values of the data, range for values of pixel
-    console.log(data);
-    const dataArray = data.stockPrices;
+    const dataArray = data;
 
     const usableWidth = canvas.width / scale - margin.left - margin.right;
     const usableHeight = canvas.height / scale - margin.top - margin.bottom;
 
-    const candleWidth = ((width * zoomState) / scale / dataArray.length) * 0.7;
+    const candleWidth = ((width * zoomState) / scale / dataArray.length) * 0.3;
     setCandleWidth(candleWidth);
     const xScale = d3
       .scaleTime()
@@ -361,10 +360,7 @@ export default function CandlestickChart({ data }: { data: StockData }) {
   };
 
   return (
-    <div
-      ref={containerRef}
-      className="canvas-container min-h-full m-8 flex-1 flex"
-    >
+    <div ref={containerRef} className="canvas-container flex-1 flex">
       <canvas ref={canvasRef} className="flex-1"></canvas>
       <canvas
         ref={hoverRef}
