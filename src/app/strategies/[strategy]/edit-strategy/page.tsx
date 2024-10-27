@@ -42,7 +42,9 @@ export default function EditStrategy({
       };
       getStrategyName();
     } catch (error) {
-      console.log(error);
+      if (error instanceof Error) {
+        setError(error.message);
+      }
     }
   }, []);
 
